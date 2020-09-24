@@ -16,15 +16,14 @@ int main(){
 			mirkoWord.push_back(letters.back());
 			letters.pop_back();
 		} else { // Slavko's turn
-			string::iterator it = letters.begin();
-			string::iterator bestChar = letters.begin();
-			for (; it!=letters.end(); ++it){
-				if (*it <= *bestChar){
-					bestChar = it;
+			for (char bestChar='a'; bestChar <= 'z'; ++bestChar){
+				int pos = letters.rfind(bestChar);
+				if (pos != string::npos){
+					slavkoWord.push_back(bestChar);
+					letters.erase(pos,1);
+					break;
 				}
 			}
-			slavkoWord.push_back(*bestChar);
-			letters.erase(bestChar);
 		}
 	}
 	if (slavkoWord.compare(mirkoWord) < 0){
