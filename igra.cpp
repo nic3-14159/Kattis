@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <string>
-#include <list>
+#include <deque>
 #include <map>
 
 using namespace std;
@@ -8,19 +8,15 @@ using namespace std;
 int main(){
 	int n;
 	scanf("%d", &n);
-	char buf[n+1];
+	char letterStr[n+1];
 	string mirkoWord;
 	string slavkoWord;
-	scanf("%s", buf);
-	string letterStr = string(buf);
-	map<char, list<int>>letters;
-	int lastPointer = letterStr.length()-1;
+	scanf("%s", letterStr);
+	map<char, deque<int>>letters;
+	int lastPointer = n-1;
 	
 	for (int i = 0; i < n; i++){
-		letters[buf[i]].push_back(i);
-	}
-	for (char i = 'a'; i <= 'z'; i++){
-		letters[i].sort();
+		letters[letterStr[i]].push_back(i);
 	}
 
 	for (int i = 0; i < n; i++){
@@ -31,7 +27,7 @@ int main(){
 			}
 			c = letterStr[lastPointer];
 			mirkoWord.push_back(c);
-			letters[c].remove(lastPointer);
+			letters[c].pop_back();
 			letterStr[lastPointer] = '.';
 		} else { // Slavko's turn
 			for (char bestChar='a'; bestChar <= 'z'; ++bestChar){
@@ -39,7 +35,7 @@ int main(){
 					int pos = letters[bestChar].back();
 					slavkoWord.push_back(bestChar);
 					letterStr[pos] = '.';
-					letters[bestChar].remove(letters[bestChar].back());
+					letters[bestChar].pop_back();
 					break;
 				}
 			}
