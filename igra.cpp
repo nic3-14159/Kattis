@@ -40,12 +40,13 @@ int main(){
 				}
 			}
 		}
+		//printf("%s %s %s\n", slavkoWord.c_str(), mirkoWord.c_str(), letterStr);
 	}
 	if (slavkoWord.compare(mirkoWord) < 0){
 		printf("DA\n");
 	} else {
 		printf("NE\n");
 	}
-	printf("%s\n", slavkoWord.c_str());
+	//printf("%s\n", slavkoWord.c_str());
 	return 0;
 }
